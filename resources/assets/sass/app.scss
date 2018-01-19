@@ -1,0 +1,24 @@
+// Fonts
+
+
+// Icons
+@import "~font-awesome/scss/font-awesome";
+
+//spinkit
+@import url("https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinkit.min.css");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+//Style
+@import "../../coreui/scss/style";
+
+//vue-toastr
+@import "~cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css";
+
+//dataTables
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "~datatables.net-responsive-bs4/css/responsive.bootstrap4.css";
