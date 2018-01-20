@@ -6,17 +6,20 @@
           <div slot="header">
             <strong>Nuevo Reproductor (a)</strong>
           </div>
+          <alert-error :form="form" message="Hubo algunos problemas con su entrada."></alert-error>
           <b-form @submit.prevent="createReproductor" @keydown="form.onKeydown($event)" @reset="onReset">
             <div class="row">
               <div class="col-sm-6">
-                <b-form-fieldset label="Código">
-                  <b-form-input type="text" v-model="form.codigo"></b-form-input>
-                </b-form-fieldset>
+                <b-form-group label="Código" label-for="codigo">
+                  <b-form-input type="text" v-model="form.codigo" name="codigo" :class="{ 'is-invalid': form.errors.has('codigo') }"></b-form-input>
+                  <has-error :form="form" field="codigo"></has-error> 
+                </b-form-group>
               </div>
               <div class="col-sm-6">
-              <b-form-fieldset label="Origen">
-                <b-form-select v-model="form.origen" :options="origenes"></b-form-select>
-              </b-form-fieldset>
+                <b-form-group label="Origen" label-for="origen">
+                  <b-form-select v-model="form.origen" name="origen" :options="origenes" :class="{ 'is-invalid': form.errors.has('origen') }"></b-form-select>
+                  <has-error :form="form" field="origen"></has-error>
+                </b-form-group>
               </div>
             </div>
             <div class="row" v-if="form.origen == 'COMPRA'">
@@ -93,7 +96,7 @@
 <script>
 import vSelect from "vue-select"
 import { mapGetters } from 'vuex'
-import { Form } from 'vform'
+import Form from 'vform'
 
 export default {
   name: 'inseminacion',

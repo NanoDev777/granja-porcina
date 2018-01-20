@@ -3,9 +3,9 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
-        <alert-error :form="form"></alert-error>
           <div class="card-group mb-0">
             <div class="card p-4">
+              <alert-error :form="form" message="Hubo algunos problemas con su entrada."></alert-error>
               <div class="card-body">
               <form @submit.prevent="login" @keydown="form.onKeydown($event)">
               <!-- Alert -->
