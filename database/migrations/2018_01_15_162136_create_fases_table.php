@@ -28,6 +28,6 @@ class CreateFasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fases');
+        Schema::dropIfExists('fase');
     }
 }

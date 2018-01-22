@@ -28,6 +28,6 @@ class CreateGeneticasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('geneticas');
+        Schema::dropIfExists('genetica');
     }
 }

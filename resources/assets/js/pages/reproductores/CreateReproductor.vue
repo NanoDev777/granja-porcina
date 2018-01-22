@@ -6,8 +6,8 @@
           <div slot="header">
             <strong>Nuevo Reproductor (a)</strong>
           </div>
-          <alert-error :form="form" message="Hubo algunos problemas con su entrada."></alert-error>
-          <b-form @submit.prevent="createReproductor" @keydown="form.onKeydown($event)" @reset="onReset">
+          <alert-error :form="form" message="Hubo algunos problemas al guardar los datos."></alert-error>
+          <b-form @submit.prevent="createReproductor" @keydown="form.onKeydown($event)" @reset="onReset" @change="form.onKeydown($event)">
             <div class="row">
               <div class="col-sm-6">
                 <b-form-group label="Código" label-for="codigo">
@@ -76,12 +76,13 @@
               <div class="col-sm-6">
                 <button :disabled="form.busy" type="submit" class="btn btn-primary btn-lg btn-block">
                   <i v-if="form.busy" class="fa fa-fw fa-spinner fa-spin"></i>
-                  <i v-else class="fa fa-fw fa-sign-in"></i>
+                  <i v-else class="fa fa-fw fa-floppy-o"></i>
                   Registrar
                 </button>
               </div>
               <div class="col-sm-6">
                 <button type="reset" class="btn btn-danger btn-lg btn-block">
+                  <i class="fa fa-fw fa-recycle"></i>
                   Limpiar
                 </button>
               </div>

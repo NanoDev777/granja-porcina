@@ -8,7 +8,6 @@
               <alert-error :form="form" message="Hubo algunos problemas con su entrada."></alert-error>
               <div class="card-body">
               <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-              <!-- Alert -->
                 <h2>Iniciar Sesión</h2>
                 <p class="text-muted">Escriba sus datos para ingresar al sistema</p>
 
@@ -105,6 +104,7 @@ export default {
           message:'Ingreso correctamente al sistema.'
         })
       }).catch((error) => {
+        this.status = false
         //console.log(error.response.data)
       })
     }

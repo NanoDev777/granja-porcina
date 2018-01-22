@@ -17,6 +17,7 @@ class CreateUbicacionsTable extends Migration
             $table->increments('id');
             $table->tinyInteger('nave');
             $table->tinyInteger('sala');
+            $table->integer('capacidad');
             $table->tinyInteger('estado')->default('1');;
 
             //foraneas
@@ -35,6 +36,6 @@ class CreateUbicacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ubicacions');
+        Schema::dropIfExists('ubicacion');
     }
 }

@@ -2,11 +2,6 @@
   <div class="container animated fadeIn">
     <div class="row">
       <div class="col-sm-12">
-        <div class="sk-three-bounce" v-if="!reproductores.length">
-          <div class="sk-child sk-bounce1"></div>
-          <div class="sk-child sk-bounce2"></div>
-          <div class="sk-child sk-bounce3"></div>
-          </div>
         <b-card>
           <div class="table-responsive">
             <table id="example" class="table table-striped" cellspacing="0" width="100%">

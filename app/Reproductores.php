@@ -17,4 +17,8 @@ class Reproductores extends Model
     public function ubicacion() {
       return $this->belongsTo(Ubicacion::class);
     }
+
+    public function inseminacion() {
+      return $this->belongsTo(Inseminacion::class);
+    }
 }

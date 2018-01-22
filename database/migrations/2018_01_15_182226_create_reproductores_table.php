@@ -21,11 +21,11 @@ class CreateReproductoresTable extends Migration
             $table->enum('origen', ['COMPRA','GRANJA']);
             $table->date('fecha_llegada')->nullable();
             $table->decimal('precio', 8, 2)->nullable();
-            $table->decimal('peso', 8, 2)->nullable();;
+            $table->decimal('peso', 8, 2)->nullable();
             $table->date('fecha_nacimiento');
             $table->enum('sexo', ['HEMBRA','MACHO']);
             $table->string('condicion',64);
-            $table->string('observacion',128)->nullable();;
+            $table->string('observacion',128)->nullable();
             $table->tinyInteger('estado')->default('1');
             $table->timestamps();
 
