@@ -10,6 +10,11 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 
 class AuthenticateController extends Controller {
+  public function index(){
+    $user = User::all();
+
+    return datatables()->collection($user)->toJson();
+  }
 
   public function login(Request $request) {
 

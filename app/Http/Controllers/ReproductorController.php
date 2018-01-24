@@ -13,19 +13,16 @@ class ReproductorController extends Controller
     }
 
     public function index() {
-      #$reproducers = Reproductores::join('genetica', 'reproductores.genetica_id','=', 'genetica.id')
-                                  #->select('reproductores.*')
-                                  #->get();
       $array = array();
       $data = array();
       $reproducers = Reproductores::orderBy('id', 'desc')->get();
-      $data = array();
       foreach ($reproducers as $row) {
         $this->array_push_assoc($array, array('codigo'=>$row->codigo,'fecha'=>$row->fecha_nacimiento,'sexo'=>$row->sexo,'condicion'=>$row->condicion,'genetica'=>$row->genetica->nombre,'precio'=>$row->precio));
         array_push($data,$array);
       }
- 
-      return response()->json(['data' => $data]);
+
+
+      return datatables()->collection($data)->toJson();
     }
 
     public function store(Request $request) {
@@ -58,6 +55,14 @@ class ReproductorController extends Controller
       ]);
 
       return response()->json(['data' => $reproductor, 'msg' => 'Reproductor agregado correctamente!']);
+    }
+
+    public function hembraInseminaciones() {
+      $reproducers = Reproductores::join("inseminacion","reproductores.id","=","inseminacion.hembra_id")
+                     ->where('reproductores.codigo','=',2)
+                     ->select("inseminacion.fecha","inseminacion.hora")
+                     ->get();
+      return response()->json(['data' => $reproducers]);
     }
 
 }

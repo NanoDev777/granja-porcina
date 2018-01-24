@@ -7,9 +7,12 @@
             <table id="example" class="table table-striped" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>NAME</th>
-                  <th>EMAIL</th>
+                  <th>Código</th>
+                  <th>Fecha</th>
+                  <th>Sexo</th>
+                  <th>Condición</th>
+                  <th>Genética</th>
+                  <th>Precio</th>
                 </tr>
               </thead>
             </table>
@@ -31,23 +34,27 @@
     name: 'list-reproductores',
     data:() => {
       return {
-        fields: ['codigo', 'fecha', 'sexo', 'condicion', 'genetica', 'precio']
       }
     },
     created() {
-      this.$store.dispatch("getReproductores")
-    },
-    mounted: function() {
       $(function() {
+        var token = localStorage.getItem('token')
         $('#example').DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
-          ajax: "/api/users",
+          ajax: {
+            url: '/api/reproductores',
+            type: 'GET',
+            headers: { "Authorization": 'Bearer ' + token }
+          },
           columns: [
-            {data: "id"},
-            {data: "name"},
-            {data: "email"}
+            {data: "codigo"},
+            {data: "fecha"},
+            {data: "sexo"},
+            {data: "condicion"},
+            {data: "genetica"},
+            {data: "precio"}
           ],
           columnDefs: [{
             targets: 0,

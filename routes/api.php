@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,11 +22,10 @@ Route::post('refresh-token', 'AuthenticateController@refreshToken');
 
 Route::middleware(['jwt.auth'])->group(function () {
   Route::resource('notes', 'NotesController');
-  Route::resource('reproductores', 'ReproductorController');
   Route::post('logout', 'AuthenticateController@logout');
   Route::post('save', 'ReproductorController@store');
+  Route::get('hemInse', 'ReproductorController@hembraInseminaciones');
+  Route::get('users', 'AuthenticateController@index');
+  Route::get('reproductores', 'ReproductorController@index');
 });
 
-Route::get('users', function(){
-  return datatables()->eloquent(App\User::query())->toJson();
-});
