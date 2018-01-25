@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reproductores extends Model
 { 
 	protected $fillable = [
-      'codigo', 'origen', 'fecha_llegada', 'precio', 'peso', 'fecha_nacimiento', 'sexo', 'observacion', 'genetica_id', 'ubicacion_id'
+      'codigo', 'origen', 'fecha_llegada', 'precio', 'peso', 'fecha_nacimiento', 'sexo', 'condicion', 'observacion', 'genetica_id', 'ubicacion_id'
     ];
 
     public function genetica() {

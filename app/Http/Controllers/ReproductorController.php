@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Reproductores;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReproductorController extends Controller
 {
@@ -13,31 +14,30 @@ class ReproductorController extends Controller
     }
 
     public function index() {
-      $array = array();
-      $data = array();
-      $reproducers = Reproductores::orderBy('id', 'desc')->get();
-      foreach ($reproducers as $row) {
-        $this->array_push_assoc($array, array('codigo'=>$row->codigo,'fecha'=>$row->fecha_nacimiento,'sexo'=>$row->sexo,'condicion'=>$row->condicion,'genetica'=>$row->genetica->nombre,'precio'=>$row->precio));
-        array_push($data,$array);
+      $reproducers = Reproductores::all();
+      return datatables()->collection($reproducers)->toJson();
+    }
+
+    public function show($id) {
+      try {
+        $reproducers = Reproductores::findOrFail($id);
+      } catch (ModelNotFoundException $e) {
+          return response()->json(['error' => 'No se encontro el recurso'], 404);
       }
-
-
-      return datatables()->collection($data)->toJson();
+      return response()->json(['data' => $reproducers], 200);
     }
 
     public function store(Request $request) {
-      $this->validate($request, [
+
+
+        $this->validate($request, [
         'codigo' => 'required',
         'origen' => 'required',
-        'llegada' => 'required',
-        'precio' => 'required',
         'nacimiento' => 'required',
         'peso' => 'required',
         'sexo' => 'required',
-        //'condicion' => 'required',
         'genetica' => 'required',
         'ubicacion' => 'required',
-        'observacion' => 'required'
       ]);
 
       $reproductor = Reproductores::create([
@@ -48,7 +48,7 @@ class ReproductorController extends Controller
         'fecha_nacimiento' => $request->nacimiento,
         'peso' => $request->peso,
         'sexo' => $request->sexo,
-        //'condicion' => $request->condicion,
+        'condicion' => $request->condicion,
         'genetica_id' => $request->genetica,
         'ubicacion_id' => $request->ubicacion,
         'observacion' => $request->observacion

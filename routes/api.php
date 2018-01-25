@@ -21,11 +21,14 @@ Route::middleware(['guest'])->group(function () {
 Route::post('refresh-token', 'AuthenticateController@refreshToken');
 
 Route::middleware(['jwt.auth'])->group(function () {
-  Route::resource('notes', 'NotesController');
   Route::post('logout', 'AuthenticateController@logout');
+
+  Route::get('reproductores', 'ReproductorController@index');
+  Route::get('reproductores/{id}', 'ReproductorController@show');
   Route::post('save', 'ReproductorController@store');
   Route::get('hemInse', 'ReproductorController@hembraInseminaciones');
-  Route::get('users', 'AuthenticateController@index');
-  Route::get('reproductores', 'ReproductorController@index');
+
+  Route::resource('notes', 'NotesController');
+
 });
 

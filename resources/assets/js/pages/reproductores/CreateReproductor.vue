@@ -2,6 +2,7 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-8 mx-auto">
+      <pre>{{ $data }}</pre>
         <b-card>
           <div slot="header">
             <strong>Nuevo Reproductor (a)</strong>
@@ -24,14 +25,16 @@
             </div>
             <div class="row" v-if="form.origen == 'COMPRA'">
               <div class="col-sm-6">
-                <b-form-fieldset label="Fecha de llegada">
-                  <b-form-input type="text" v-model="form.llegada"></b-form-input>
-                </b-form-fieldset>
+                <b-form-group label="Fecha de llegada" label-for="llegada">
+                  <b-form-input type="text" v-model="form.llegada" name="llegada" :class="{ 'is-invalid': form.errors.has('llegada') }"></b-form-input>
+                  <has-error :form="form" field="llegada"></has-error>
+                </b-form-group>
               </div>
               <div class="col-sm-6">
-                <b-form-fieldset label="Precio de compra">
-                  <b-form-input type="text" v-model="form.precio"></b-form-input>
-                </b-form-fieldset>
+                <b-form-group label="Precio de compra" label-for="precio">
+                  <b-form-input type="text" v-model="form.precio" name="precio" :class="{ 'is-invalid': form.errors.has('precio') }"></b-form-input>
+                  <has-error :form="form" field="precio"></has-error>
+                </b-form-group>
               </div>
             </div>
             <div class="row">
@@ -49,7 +52,8 @@
             <div class="row">
               <div class="col-sm-6">
                 <b-form-fieldset label="Sexo">
-                  <b-form-select v-model="form.sexo" :options="sexos"></b-form-select>
+                  <b-form-select v-model="form.sexo" :options="sexos" @change="getCondicion($event)">
+                  </b-form-select>
                 </b-form-fieldset>
               </div>
               <div class="col-sm-6">
@@ -73,17 +77,23 @@
             </div>
             <br />
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <button :disabled="form.busy" type="submit" class="btn btn-primary btn-lg btn-block">
                   <i v-if="form.busy" class="fa fa-fw fa-spinner fa-spin"></i>
                   <i v-else class="fa fa-fw fa-floppy-o"></i>
                   Registrar
                 </button>
               </div>
-              <div class="col-sm-6">
-                <button type="reset" class="btn btn-danger btn-lg btn-block">
+              <div class="col-sm-4">
+                <button type="reset" class="btn btn-default btn-lg btn-block">
                   <i class="fa fa-fw fa-recycle"></i>
                   Limpiar
+                </button>
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-danger btn-lg btn-block">
+                  <i class="fa fa-fw fa-times-circle"></i>
+                  Cancelar
                 </button>
               </div>
             </div>
@@ -112,19 +122,22 @@ export default {
         nacimiento: '',
         peso: '',
         sexo: null,
+        condicion: '',
         genetica: '',
         ubicacion: '',
         observacion: ''
       }),
-      options: ['foo','bar','baz'],
       origenes: ['COMPRA', 'GRANJA'],
       sexos: ['HEMBRA', 'MACHO']
     }
   },
   methods: {
-    onSubmit (evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    getCondicion (event) {
+      if (event == "HEMBRA") {
+        this.form.condicion = 'VACIA'
+      } else {
+        this.form.condicion = 'REPRODUCTOR'
+      }
     },
     onReset (evt) {
       evt.preventDefault();

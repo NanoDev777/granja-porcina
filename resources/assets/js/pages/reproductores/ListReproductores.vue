@@ -7,11 +7,9 @@
             <table id="example" class="table table-striped" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Código</th>
-                  <th>Fecha</th>
-                  <th>Sexo</th>
+                  <th width="50px">Código</th>
+                  <th width="80px">Opciones</th>
                   <th>Condición</th>
-                  <th>Genética</th>
                   <th>Precio</th>
                 </tr>
               </thead>
@@ -36,9 +34,10 @@
       return {
       }
     },
-    created() {
+    created () {
       $(function() {
         var token = localStorage.getItem('token')
+        $.fn.dataTable.ext.errMode = 'none'
         $('#example').DataTable({
           responsive: true,
           processing: true,
@@ -50,18 +49,13 @@
           },
           columns: [
             {data: "codigo"},
-            {data: "fecha"},
-            {data: "sexo"},
+            {
+              data: null,
+              defaultContent: '<button type="button" class="btn btn-default btn-sm"><i v-else class="fa fa-medkit"></i></button> <button type="button" class="btn btn-default btn-sm"><i v-else class="fa fa-pencil"></i></button>'
+            },
             {data: "condicion"},
-            {data: "genetica"},
             {data: "precio"}
-          ],
-          columnDefs: [{
-            targets: 0,
-            render: function ( data, type, row, meta ) {
-              return '<a href="'+data+'">'+data+'</a>';
-            }
-          }]
+          ]
         });
       });
     },
